@@ -1,1 +1,20 @@
+def chatbot_ai():
+    print("\n=== Chatbot AI Darurat ===")
+    print("Ketik 'status' untuk menanyakan status bencana, 'evakuasi' untuk panduan evakuasi, atau 'keluar' untuk selesai.")
+    while True:
+        user = input("Anda: ").strip().lower()
+        if user == "status":
+            print("[Bot] Saat ini tidak ada bencana terdeteksi di sistem (simulasi).")
+        elif user == "evakuasi":
+            print("[Bot] Panduan Evakuasi:")
+            print(" 1. Segera menuju titik kumpul terdekat.")
+            print(" 2. Hindari lift, gunakan tangga darurat.")
+            print(" 3. Ikuti jalur evakuasi yang tersedia.")
+        elif user == "keluar":
+            print("[Bot] Terima kasih. Tetap waspada!")
+            break
+        else:
+            print("[Bot] Maaf, perintah tidak dikenali.")
 
+if __name__ == "__main__":
+    chatbot_ai()
