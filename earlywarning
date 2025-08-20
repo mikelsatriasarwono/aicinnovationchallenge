@@ -1,0 +1,44 @@
+import time
+import random
+
+# Data simulasi transportasi umum
+public_transports = [
+    {"type": "Bus", "id": "B01", "status": "Running"},
+    {"type": "Kereta", "id": "K02", "status": "Running"},
+    {"type": "Bus", "id": "B03", "status": "Running"},
+]
+
+def detect_disaster():
+    disasters = ['Gempa', 'Banjir', None]
+    detected = random.choice(disasters)
+    if detected:
+        magnitude = random.uniform(5.0, 8.0)
+        location = random.choice(['Jakarta', 'Bandung', 'Surabaya'])
+        print(f"[EWS] Deteksi {detected} Magnitudo {magnitude:.1f} di {location}")
+        return {"type": detected, "magnitude": magnitude, "location": location}
+    else:
+        print("[EWS] Tidak ada bencana terdeteksi.")
+        return None
+
+def emergency_stop_transport(disaster):
+    print("[EWS] Menghentikan transportasi umum di wilayah terdampak...")
+    for t in public_transports:
+        t["status"] = "Stop" if disaster else "Running"
+    for t in public_transports:
+        print(f" - {t['type']} {t['id']}: {t['status']}")
+    if disaster:
+        send_sms_alert(disaster)
+        display_public_info(disaster)
+
+def send_sms_alert(disaster):
+    print(f"[SMS ALERT] Peringatan {disaster['type']} di {disaster['location']}, segera evakuasi bila perlu!")
+
+def display_public_info(disaster):
+    print(f"[INFO BOARD] {disaster['type']} terjadi di {disaster['location']}. Transportasi umum dihentikan sementara.")
+
+if __name__ == "__main__":
+    print("=== Simulasi EWS Transportasi Umum ===")
+    for _ in range(3):  # Simulasi 3 deteksi
+        disaster = detect_disaster()
+        emergency_stop_transport(disaster)
+        time.sleep(2)
